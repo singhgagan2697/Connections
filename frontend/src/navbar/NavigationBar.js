@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
+import axios from 'axios';
 
 class NavigationBar extends Component {
     
     constructor(props) {
         super(props);
+        this.createUser = this.createUser.bind(this);
+    }
+
+    createUser() {
+        axios.post('http://localhost:5000/user', {email: 'email@email.com', password:'password'}).then((user) => {
+            console.log(user);
+        });
     }
 
     render() {
@@ -15,7 +23,7 @@ class NavigationBar extends Component {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link href="#">Home</Nav.Link>
-                        <Nav.Link href="#link">Link</Nav.Link>
+                        <Nav.Link onClick={() => this.createUser()}>API USER TEST</Nav.Link>
                         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
